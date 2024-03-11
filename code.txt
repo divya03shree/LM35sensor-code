@@ -15,19 +15,24 @@ void setup() {
 count++;
 void loop() {
   int sensorValue = analogRead(sensorPin);
-  float temperature = (sensorValue * 5.0) / 1024.0;
+  float temperature = (sensorValue * 5.0) / 1024.0;//converting to operating 5v and dividing it by 1024
   if (temperature < 30) {
-    if (count>= interval / 2) {
-      count = 0;
-      if (ledState == LOW) {
+    if (count>= interval / 2) //until counter reaches half of the  interval value
+      {
+      count = 0;//reset
+      if (ledState == LOW) 
+      {
         ledState = HIGH;
-      } else {
+      } else
+      {
         ledState = LOW;
       }
-      digitalWrite(ledPin, ledState);
+      digitalWrite(ledPin, ledState);//sets the state of onboard LED
     }
-  } else {
-    interval = 500;
-    count = 0;
+    }
+else
+  {
+    interval = 500;//blinking for 500ms
+    count = 0;//reset
   }
 }
