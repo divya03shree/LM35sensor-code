@@ -1,0 +1,33 @@
+ASSIGNMENT CODE:
+
+#Interfacing LM35 sensor with LED
+
+const int sensorPin = A0;//given that sensor pin to be connected
+const int ledPin = 13;//on-board led pin
+int count=0;//initialized count to 0
+int interval = 250;//initialized time interval
+int ledState = LOW;//initialized state of LED
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(ledPin, OUTPUT);//output to be displayed
+}
+count++;
+void loop() {
+  int sensorValue = analogRead(sensorPin);
+  float temperature = (sensorValue * 5.0) / 1024.0;
+  if (temperature < 30) {
+    if (count>= interval / 2) {
+      count = 0;
+      if (ledState == LOW) {
+        ledState = HIGH;
+      } else {
+        ledState = LOW;
+      }
+      digitalWrite(ledPin, ledState);
+    }
+  } else {
+    interval = 500;
+    count = 0;
+  }
+}
